@@ -6,7 +6,7 @@ This is the Matlab code for A-Cure. It applies
   2. IP-Spike-SRMSE method
   3. IP-Cumulative-SRMSE method
   
-  to dectect/delete noisy reports and reconstruct four disease data from aggregated reports set including both normal and noisy reports
+  to dectect/delete noisy reports and reconstruct four disease data from aggregated reports set including both normal and noisy reports.
 
 More detail in reference: Jiawei Xu, Vladimir Zadorozhny, and John Grant. IncompFuse: **A-Cure**: An Accurate Information Reconstruction from Inaccurate Data Sources. Information Systems.
 
