@@ -37,7 +37,7 @@ data_file = strcat(pwd,'\Tycho.mat');
 load(data_file);
 
 % setting up output folder
-output_folder = strcat(pwd,'\outPut\');
+output_folder = strcat(pwd,'\outPut_test_2\');
 folder0 = output_folder;
 
 % Calculation Start:
@@ -150,8 +150,8 @@ for nDisease = 1:4
             % detect the noisy reports.
             % The only usage of this section is to provide a reference for a
             % threshold to detect the 'spike' of S-RMSE.
-            % if you use other way to define the threshold, you don't need
-            % this section.
+            % if you use alternative way to find a threshold, for example the way in the next section
+            % below, you don't need this section.
             threshE = 1:-0.01:0;
             length_threshE = length(threshE);
             recon_err = zeros(length_threshE,1);
@@ -220,18 +220,42 @@ for nDisease = 1:4
             saveas(gcf,figureName);
             close(gcf);
             % the above is plot code: SRMSE vs Energy-threshold
-            %}
-            
+            %}           
             %**************************************************************
             % the above section is a trial version (not used in this paper) of applying SRMSE to
             % detect the noisy reports.
             
             
+            %**************************************************************
+            % the Following section is an alter way to define the threshold
+            % for 'Spike'. The performance is also very good.
+            %Sequential RMSE without delete any reports
+            size_report_set = num_reports;
+            reports_noise = reports_cell.(name_txt_disease);
+            [recon_reports_noise, TOL] = report_set_recon_data(reports_noise,events);
+            
+            srmse_noise = zeros(size_report_set,1);
+            for k = 1:size_report_set
+                reports_del_one = reports_noise;
+                reports_del_one(k,:) = [];
+                [recon_reports_del_one, TOL2] = report_set_recon_data(reports_del_one,events);
+                RMSE_del_one = sqrt(mean((recon_reports_del_one - recon_reports_noise).^2));
+                srmse_noise(k) = RMSE_del_one;
+            end
+            
+            mean_srmse_alternative_way = mean(srmse_noise);              
+            %**************************************************************
+            % the above section is an alter way to define the threshold
+            % for 'Spike'. The performance is also very good.   
+            
             
             % delete the reports which cause the spike larger than 
             % double of average of SRMSE screening in the section above
-            % you can use other way to define the threshold
+            % you can use an alternative way to define the threshold
+            
+            %threshold_E_spike = 0.4 * mean_srmse_alternative_way;
             threshold_E_spike = 2* mean(recon_err(2:sizeNoneZero));
+            
             threshold_E = 0;
             threshold_reports = 2;
             
