@@ -14,8 +14,8 @@
 % from https://www.tycho.pitt.edu
 
 % Output
-% folder: output
-% result file: /output/Results_All.mat, including:
+% folder: output/IP_EF_SRMSE
+% result file: /output/IP_EF_SRMSE/Results_All_IP_EF_SRMSE.mat, including:
 % 1. Accuracy
 % LSQ reconstruction applying noise detection/deletion with IP-EF-SRMSE method
 %
@@ -37,8 +37,9 @@ data_file = strcat(pwd,'\Tycho.mat');
 load(data_file);
 
 % setting up output folder
-output_folder = strcat(pwd,'\outPut_test_2\');
+output_folder = strcat(pwd,'\outPut\IP_EF_SRMSE\');
 folder0 = output_folder;
+mkdir(folder0);
 
 % Calculation Start:
 % nDisease = 1:4 will calculate all 4 disease
@@ -464,7 +465,7 @@ for nDisease = 1:4
 end %end of for nDisease
 
 %save all variables
-variableName = strcat(folder0,'Results_All.mat');
+variableName = strcat(folder0,'Results_All_IP_EF_SRMSE.mat');
 save(variableName,'str_Acc', 'str_RMSE_clean_hfuse', 'str_RMSE_clean_LSQ',...
     'str_RMSE_IP_EF_hfuse','str_RMSE_IP_EF_LSQ',...
     'str_RMSE_Noise_hfuse', 'str_RMSE_Noise_LSQ');
