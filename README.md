@@ -42,19 +42,34 @@ We ran this code on Matlab R2018a.
 **Matlab Code dependencies:**
 
 	1. IP-EF-SRMSE method:
+	
 	-IP_EF_SRMSE.m 
 		-IP_calculation_v2_2.m:  % Created reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
+		
 			-collect_reports_norm.m: % Randomly create reports set using disease data and the pre-defined parameters. Reports have: start time, end time, total value
-				-gen_report.m: % generate report
+			
+				-gen_report.m: % generate report.
+				
 			-create_noise_report.m: % Randomly create noise reports based the pre-defined parameters.
+			
 			-create_pair_reports.m: % Create all possible reports pair 
+			
 			-BIP.m: % Calculate BIP for reports pair.
+			
 			-IP_v13_2.m: % Calculate IP for report pair.
-				-duration_ratio.m: % Calculate the proximity ratio
-				-proximity_ratio_new_2.m: % Calculate the proximity ratio
+			
+				-duration_ratio.m: % Calculate the proximity ratio.
+				
+				-proximity_ratio_new_2.m: % Calculate the proximity ratio.
+				
 		-rep_constraint_equations_full.m: % re-format the report: duration matrix, and total value, respectively.
-		-Energy_Trans_M4.m: % Energy Flow algorithm to calculate the Energy of all reports  nodes.
+		
+		-Energy_Trans_M4.m: % Energy Flow algorithm to calculate the Energy of all reports nodes.
+		
 		-Relative_Energy.m: % Obtaining relative energy (E(i)/E_Max) from absolute Energy.
+		
 		-sm_reconstr_2.m: % using H-Fuse to reconstruct the disease data from aggregated reports set.
-		-lsq_reconstruct.m: % using Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE
+		
+		-lsq_reconstruct.m: % using Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
+		
 		-lsq_reconstruct_only.m: % using Least Square method to reconstruct the disease data from aggregated reports set.
