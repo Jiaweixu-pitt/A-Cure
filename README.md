@@ -1,4 +1,4 @@
-# A-Cure
+# A-Cure: An Accurate Information Reconstruction from Inaccurate Data Sources
 Storage and Share of A-Cure Matlab Code
 
 This is the Matlab code for A-Cure. It applies 
