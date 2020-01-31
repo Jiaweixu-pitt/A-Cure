@@ -77,7 +77,7 @@ We ran this code on Matlab R2018a.
 		-gen_new_report_after_EFlow_Thresh.m: % used in the section to provide reference for 'Spike' threshold. neglect it if using an alternateive way to define 'Spike'.
 		
 		-report_set_recon_data.m: % used in the section of an alternative way to define 'Spike' threshold, consist of two parts:
-			-rep_constraint_equations_full.m
-			--lsq_reconstruct_only.m
+			-rep_constraint_equations_full.m % introduced before
+			--lsq_reconstruct_only.m % introduced before
 			
 		
