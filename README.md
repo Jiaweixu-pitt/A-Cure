@@ -73,3 +73,11 @@ We ran this code on Matlab R2018a.
 		-lsq_reconstruct.m: % using Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
 		
 		-lsq_reconstruct_only.m: % using Least Square method to reconstruct the disease data from aggregated reports set.
+		
+		-gen_new_report_after_EFlow_Thresh.m: % used in the section to provide reference for 'Spike' threshold. neglect it if using an alternateive way to define 'Spike'.
+		
+		-report_set_recon_data.m: % used in the section of an alternative way to define 'Spike' threshold, consist of two parts:
+			-rep_constraint_equations_full.m
+			--lsq_reconstruct_only.m
+			
+		
