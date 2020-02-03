@@ -2,7 +2,7 @@
 Storage and Share of A-Cure Matlab Code
 
 This is the Matlab code for A-Cure. It applies 
-  1. IP-EF-SRMSE method (best of all three)
+  1. IP-EF-SRMSE method (best of all three): run this file IP_EF_SRMSE.m
   2. IP-Spike-SRMSE method
   3. IP-Cumulative-SRMSE method
   
