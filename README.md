@@ -2,9 +2,9 @@
 Storage and Share of A-Cure Matlab Code
 
 This is the Matlab code for A-Cure. It applies 
-  1. IP-EF-SRMSE method (best of all three): run this file IP_EF_SRMSE.m
-  2. IP-Spike-SRMSE method
-  3. IP-Cumulative-SRMSE method
+  1. IP-EF-SRMSE method (best of all three): run the file IP_EF_SRMSE.m
+  2. IP-Spike-SRMSE method: run the file IP_Cumulative_SRMSE.m
+  3. IP-Cumulative-SRMSE method run the file: IP_Spike_SRMSE.m
   
   to dectect/delete noisy reports and reconstruct four disease data from aggregated reports set including both normal and noisy reports.
 
