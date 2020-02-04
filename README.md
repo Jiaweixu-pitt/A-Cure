@@ -2,9 +2,9 @@
 Storage and Share of A-Cure Matlab Code
 
 This is the Matlab code for A-Cure. It applies 
-  1. IP-EF-SRMSE method (best of all three): run the file IP_EF_SRMSE.m
-  2. IP-Spike-SRMSE method: run the file IP_Cumulative_SRMSE.m
-  3. IP-Cumulative-SRMSE method run the file: IP_Spike_SRMSE.m
+  1. IP-EF-SRMSE method (best of all three)
+  2. IP-Spike-SRMSE method
+  3. IP-Cumulative-SRMSE method
   
   to dectect/delete noisy reports and reconstruct four disease data from aggregated reports set including both normal and noisy reports.
 
@@ -12,9 +12,54 @@ More detail in reference: Jiawei Xu, Vladimir Zadorozhny, and John Grant. Incomp
 
 More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant. "**IncompFuse**: a logical framework for historical information fusion with inaccurate data sources." Journal of Intelligent Information Systems (2019): 1-19.
 
-We ran this code on Matlab R2018a.
+## 1. How to run
 
-## 1. IP-EF-SRMSE method
+1. Download/Close the A-Cure folder as A-Cure.zip.
+
+2. Extract it and you should have A-Cure folder containing all code.
+
+3. Open Matlab (We ran this code on Matlab R2018a), 
+	- add the A-Cure folder to path, 
+	- **click into** the A-Cure folder (A-Cure folder should be the "current folder" for Matlab. You can execute pwd() in the command window to check it),
+	- delete the folder **outPut**. (if this fold not deleted, it will show a Warning when running the code, but it is ok)
+	- execute the folowing command in the command window: run_A_Cure
+	- the running process is:
+	
+	![image of running process](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/img_for_readme/output_explain_2.png)
+	
+4. Results and explanation of variables
+
+	![image of results](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/img_for_readme/output_explain_3.png)
+
+	- Acc: Accuracy
+	- RMSE_Clean: reconstruction RMSE with the report sets wihout noisy reports (using Least Square method if not mentioned)
+	- RMSE_Noise: reconstruction RMSE with the report sets wih noisy reports (using Least Square method if not mentioned)
+	- RMSE_[method]: reconstruction RMSE with the clearned report sets by a certain method, IP_Cumulative_SRMSE, IP_Spkie_SRMSE, or IP_EF_SRMSE
+	
+5. Output
+	1. Folder: **outPut**
+	![image of results](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/img_for_readme/output_explain.png)
+		- explanation of experimental settings (please check the paper for details):
+			- NoiP10_NoiS2: 'Small portion low severity noise',
+			- NoiP10_NoiS4: 'Small portion high severity noise',
+			- NoiP20_NoiS2: 'large portion low severity noise',
+			- NoiP20_NoiS4: 'large portion high severity noise'.
+	
+	2. Image: Reconstruction RMSE of different disease using different method with different experimental settings:
+		- Measles
+		![image of Measles](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Measles_RMSE.png)
+		
+		- Hepatitis
+		![image of Hepatitis](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Hepatitis_RMSE.png)
+		
+		- Pertussis
+		![image of Pertussis](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Pertussis_RMSE.png)
+		
+		- Smallpox
+		![image of Smallpox](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Smallpox_RMSE.png)
+	
+
+## 2. IP-EF-SRMSE method
 **Input**
 
 	disease data: Tycho.mat from https://www.tycho.pitt.edu
@@ -82,7 +127,7 @@ We ran this code on Matlab R2018a.
 			--lsq_reconstruct_only.m % introduced before
 			
 
-## 2. IP-Spike-SRMSE method
+## 3. IP-Spike-SRMSE method
 **Input**
 
 	disease data: Tycho.mat from https://www.tycho.pitt.edu
@@ -143,7 +188,7 @@ We ran this code on Matlab R2018a.
 			-rep_constraint_equations_full.m % introduced before
 			--lsq_reconstruct_only.m % introduced before
 			
-## 3. IP-Cumulative-SRMSE method
+## 4. IP-Cumulative-SRMSE method
 **Input**
 
 	disease data: Tycho.mat from https://www.tycho.pitt.edu
