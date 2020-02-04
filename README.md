@@ -14,7 +14,7 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 
 ## 1. How to run
 
-1. Download/Close the A-Cure folder as A-Cure.zip.
+1. Download/Clone the A-Cure project as A-Cure.zip.
 
 2. Extract it and you should have A-Cure folder containing all code.
 
@@ -37,7 +37,7 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 	- RMSE_[method]: reconstruction RMSE with the clearned report sets by a certain method, IP_Cumulative_SRMSE, IP_Spkie_SRMSE, or IP_EF_SRMSE
 	
 5. Output
-	1. Folder: **outPut**
+	1. **Folder**: outPut
 	![image of results](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/img_for_readme/output_explain.png)
 		- explanation of experimental settings (please check the paper for details):
 			- NoiP10_NoiS2: 'Small portion low severity noise',
@@ -45,17 +45,17 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 			- NoiP20_NoiS2: 'large portion low severity noise',
 			- NoiP20_NoiS4: 'large portion high severity noise'.
 	
-	2. Image: Reconstruction RMSE of different disease using different method with different experimental settings:
-		- Measles
+	2. **Image**: Reconstruction RMSE of different disease using different method with different experimental settings:
+		- **Measles**: Measles_RMSE.png
 		![image of Measles](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Measles_RMSE.png)
 		
-		- Hepatitis
+		- **Hepatitis**: Hepatitis_RMSE.png
 		![image of Hepatitis](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Hepatitis_RMSE.png)
 		
-		- Pertussis
+		- **Pertussis**: Pertussis_RMSE.png
 		![image of Pertussis](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Pertussis_RMSE.png)
 		
-		- Smallpox
+		- **Smallpox**: Smallpox_RMSE.png
 		![image of Smallpox](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Smallpox_RMSE.png)
 	
 
@@ -89,8 +89,8 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 
 	IP-EF-SRMSE method:
 	
-	-IP_EF_SRMSE.m 
-		-IP_calculation_v2_2.m:  % Created reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
+	-IP_EF_SRMSE_func.m 
+		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
 		
 			-collect_reports_norm.m: % Randomly create reports set using disease data and the pre-defined parameters. Reports have: start time, end time, total value
 			
@@ -112,13 +112,13 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 		
 		-Energy_Trans_M4.m: % Energy Flow algorithm to calculate the Energy of all reports nodes.
 		
-		-Relative_Energy.m: % Obtaining relative energy (E(i)/E_Max) from absolute Energy.
+		-Relative_Energy.m: % Obtain relative energy (E(i)/E_Max) from absolute Energy.
 		
-		-sm_reconstr_2.m: % using H-Fuse to reconstruct the disease data from aggregated reports set.
+		-sm_reconstr_2.m: % use H-Fuse to reconstruct the disease data from aggregated reports set.
 		
-		-lsq_reconstruct.m: % using Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
+		-lsq_reconstruct.m: % use Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
 		
-		-lsq_reconstruct_only.m: % using Least Square method to reconstruct the disease data from aggregated reports set.
+		-lsq_reconstruct_only.m: % use Least Square method to reconstruct the disease data from aggregated reports set.
 		
 		-gen_new_report_after_EFlow_Thresh.m: % used in the section to provide reference for 'Spike' threshold. neglect it if using an alternateive way to define 'Spike'.
 		
@@ -157,8 +157,8 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 
 	IP-Spike-SRMSE method:
 	
-	-IP_Spike_SRMSE.m 
-		-IP_calculation_v2_2.m:  % Created reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
+	-IP_Spike_SRMSE_func.m 
+		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
 		
 			-collect_reports_norm.m: % Randomly create reports set using disease data and the pre-defined parameters. Reports have: start time, end time, total value
 			
@@ -180,9 +180,9 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 		
 		-Find_IP_threshold_using_Slope.m: % find IP threshold using slope, detials in the paper.
 		
-		-lsq_reconstruct.m: % using Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
+		-lsq_reconstruct.m: % use Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
 		
-		-lsq_reconstruct_only.m: % using Least Square method to reconstruct the disease data from aggregated reports set.
+		-lsq_reconstruct_only.m: % use Least Square method to reconstruct the disease data from aggregated reports set.
 				
 		-report_set_recon_data.m: % used in the section of an alternative way to define 'Spike' threshold, consist of two parts:
 			-rep_constraint_equations_full.m % introduced before
@@ -218,8 +218,8 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 
 	IP-Cumulative-SRMSE method:
 	
-	-IP_Cumulative_SRMSE.m 
-		-IP_calculation_v2_2.m:  % Created reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
+	-IP_Cumulative_SRMSE_func.m 
+		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
 		
 			-collect_reports_norm.m: % Randomly create reports set using disease data and the pre-defined parameters. Reports have: start time, end time, total value
 			
@@ -239,9 +239,9 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 				
 		-rep_constraint_equations_full.m: % re-format the report: duration matrix, and total value, respectively.		
 		
-		-lsq_reconstruct.m: % using Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
+		-lsq_reconstruct.m: % use Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
 		
-		-lsq_reconstruct_only.m: % using Least Square method to reconstruct the disease data from aggregated reports set.
+		-lsq_reconstruct_only.m: % use Least Square method to reconstruct the disease data from aggregated reports set.
 		
 		-report_set_recon_data.m: % used in the section of an alternative way to define 'Spike' threshold, consist of two parts:
 			-rep_constraint_equations_full.m % introduced before
