@@ -22,7 +22,7 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 	- add the A-Cure folder to path, 
 	- **click into** the A-Cure folder (A-Cure folder should be the "current folder" for Matlab. You can execute pwd() in the command window to check it),
 	- delete the folder **outPut**. (if this fold not deleted, it will show a Warning when running the code, but it is ok)
-	- execute the folowing command in the command window: run_A_Cure
+	- execute the folowing command in the command window: run_A_Cure (or open the file run_A_Cure.m and run the code)
 	- the running process is:
 	
 	![image of running process](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/img_for_readme/output_explain_2.png)
