@@ -1,6 +1,5 @@
 function [reports_noise, peaks, range_peak] = create_noise_report(reports, noise_number,min,max)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+% Create noisy report
 
 % Flag_repeat = 1; % when 0, no repeat
 
