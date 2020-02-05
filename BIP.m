@@ -20,7 +20,7 @@ if neg_flag == 0
         %res = abs(RO1*V1-RO2*V2)/max(RO1*V1, RO2*V2);
     end
 elseif neg_flag == 1
-    % there is negtive values
+    % there are negative values
 end
 end
 
