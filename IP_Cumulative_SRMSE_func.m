@@ -1,7 +1,7 @@
 function [str_Acc, str_RMSE_Noise, str_RMSE_Clean,...
     str_RMSE_IP_Cumulative_SRMSE, flag] = IP_Cumulative_SRMSE_func()
-% This is the main code for A-Cure. It applys IP-Cumulative-SRMSE method
-% to dectect noisy reports for reconstruction of four disease data
+% This is the main code for A-Cure. It applies the IP-Cumulative-SRMSE method
+% to dectect noisy reports for reconstruction of four disease data sets.
 % More detail in reference:
 %****************************
 % Jiawei Xu, Vladimir Zadorozhny, and John Grant.
@@ -19,7 +19,7 @@ function [str_Acc, str_RMSE_Noise, str_RMSE_Clean,...
 % folder: output/IP_Cumulative_SRMSE/
 % result file: output/IP_Cumulative_SRMSE/Results_All_IP_Cumulative_RMSE.mat, including:
 % 1. Accuracy
-% LSQ reconstruction applying noise detection/deletion with IP-EF-SRMSE method
+% LSQ reconstruction applying noise detection/deletion with the IP-EF-SRMSE method
 %
 % 2. All reconstruction RMSE including:
 % LSQ reconstruction
@@ -28,9 +28,9 @@ function [str_Acc, str_RMSE_Noise, str_RMSE_Clean,...
 % applying noise detection/deletion with IP-Spike-SRMSE method
 %
 % Experimental Setup:
-% 4 different disease
-% 4 different reports set with different noise setting.
-% details please check the paper.
+% 4 different diseases
+% 4 different report sets with different noise settings.
+% For details please check the paper.
 
 
 % loading input disease data
@@ -68,7 +68,7 @@ for nDisease = 1:4
     period = 0; % data has no periodicity
     ip_version = 13; % version to define ip, which is used in this paper
     
-    % Parameters to set up number of noisy reports
+    % Parameters to set up the number of noisy reports
     noise_number = [10, 20];
     noise_level =["NoiP10", "NoiP20"];
     
@@ -87,8 +87,8 @@ for nDisease = 1:4
     
     name_txt_disease = strcat(deseaseS);%variable for output file name
     
-    % for certain disease calculating with different parameters of
-    % noisy reports set up
+    % Disease calculation with different parameters of
+    % noisy reports setup.
     for i_noise = 1: length(noise_number)
         for i = 1 : length(severe_ratio)
             
@@ -101,7 +101,7 @@ for nDisease = 1:4
             noise_min_now = noise_min * noise_severity(i);
             noise_max_now = noise_max * noise_severity(i);
             
-            % Created reports set based on the pre-defined parameters
+            % Create reports set based on the pre-defined parameters.
             % Modify the reports set by adding noisy reports based on the
             % pre-defined parameters
             % calculate the IP, bip, pr, dr
@@ -118,9 +118,9 @@ for nDisease = 1:4
             str_bip_max.(name_txt) = max(bip(:,3));
             
             %{
-            % auto find the IP threshold as non_zero_threshold
-            % threshold_times = 100; //orginal setting
-            % using Slop algorithm, details in the paper
+            % Find the IP threshold as non_zero_threshold
+            % threshold_times = 100; //original setting
+            % using Slope algorithm, details in the paper
             threshold_times = 100;
             [IP_threshold_new] = Find_IP_threshold_using_Slope(IP,threshold_times);
             
@@ -142,17 +142,17 @@ for nDisease = 1:4
             
             %}
             
-            % create report set with [order, #occ in non-0 IP distribution]
+            % Create report set with [order, #occ in non-0 IP distribution].
             size_report_set = size(reports_noise);
             size_report_set = size_report_set(1);
             
-            % prepare to calculate the cumulative ip for each report
+            % Prepare to calculate the cumulative IP for each report.
             report_IP_1 = IP(:,[1 3]);
             report_IP_2 = IP(:,[2 3]);
             report_IP = cat(1, report_IP_1, report_IP_2);
             report_IP_acc = zeros(size_report_set,2);
             
-            % calculate the cumulative ip for each report
+            % Calculate the cumulative IP for each report.
             for i_r_ip = 1:size_report_set
                 report_certain_ip = report_IP;
                 result = find(report_certain_ip(:,1) == i_r_ip);
@@ -161,21 +161,21 @@ for nDisease = 1:4
                 report_IP_acc(i_r_ip,2) = sum(report_certain_ip(:,2));
             end
             
-            % for reports with noise
-            % get duration matrix and values
+            % For reports with noise
+            % get duration matrix and values.
             [recon_reports_noise] = report_set_recon_data(reports_noise,events);
             RMSE_Noise = sqrt(mean((recon_reports_noise - events).^2));
             
-            % for reports without noise
+            % For reports without noise
             reports_clean = reports_noise;
             reports_clean(noise_reports,:) = [];
             [recon_reports_clean] = report_set_recon_data(reports_clean,events);
             RMSE_Clean = sqrt(mean((recon_reports_clean - events).^2));
             
             
-            %Sequential RMSE without delete any reports
-            %tihs is a method to provide reference to define the threshold
-            % for detecting/deleting noise report
+            %Sequential RMSE without deleting any reports.
+            %This is a method to define the threshold
+            % for detecting/deleting noisy report.
             % threshold = n*mean_srmse, n is a number.
             srmse_noise = zeros(size_report_set,1);
             for k = 1:size_report_set
@@ -189,13 +189,13 @@ for nDisease = 1:4
             mean_srmse = mean(srmse_noise);
             
             
-            %S-RMSE (with deleting) using order from IP
+            %S-RMSE (with deletion) using order from IP.
             
-            %sort report_set based the the cumulative ip
+            %Sort report_set based the the cumulative IP.
             report_set_after_IP_sort = sortrows(report_IP_acc,2,'ascend');
             
             
-            %the opposite oder to compare
+            %The opposite order for comparison
             %report_set_after_IP_sort = sortrows(report_set_after_IP,2,'descend');
             
             
@@ -211,7 +211,7 @@ for nDisease = 1:4
             threshold_rmse_del = mean_srmse * 1.2;
             threshold_reports = 0;
             
-            % final reportset ini
+            % final report set
             reports_final = reports_noise;
             
             % while will end if threshold # of reports have been checked
@@ -229,21 +229,21 @@ for nDisease = 1:4
                 reports_deleted_list_tmp = reports_deleted_list;
                 reports_deleted_list_tmp(how_many_del_tmp) = report_delete;
                 
-                % reports with current checking report
+                % reports with current report
                 reports_1 = reports_noise;
                 reports_1(reports_deleted_list,:) = [];
                 
                 
-                % reports without current checking report
+                % reports without current report
                 reports_2 = reports_noise;
                 reports_2(reports_deleted_list_tmp,:) = [];
                 
-                % compare the RMSE between two report set 1 and 2
+                % compare the RMSE between report sets 1 and 2
                 [recon_reports_1] = report_set_recon_data(reports_1,events);
                 [recon_reports_2] = report_set_recon_data(reports_2,events);
                 RMSE_1and2 = sqrt(mean((recon_reports_1 - recon_reports_2).^2));
                 
-                % check if current report should delete or not
+                % check if current report should be deleted
                 if (RMSE_1and2 >= threshold_rmse_del)
                     reports_final = reports_2;
                     
@@ -281,11 +281,11 @@ for nDisease = 1:4
             reports_target = zeros(size_reports_cm,1);
             reports_group = zeros(size_reports_cm,1);
             
-            % set non noise reports
+            % set non noisy reports
             reports_target(1:size_reports_cm) = 1;
             reports_group(1:size_reports_cm) = 1;
             
-            % set noise reports
+            % set noisy reports
             reports_target(noise_reports_target) = 2;
             reports_group(noise_reports_predict) = 2;
             
