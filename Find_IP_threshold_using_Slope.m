@@ -1,9 +1,6 @@
 function [IP_threshold_new] = Find_IP_threshold_using_Slope(IP, threshold_times)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
-        % auto find the IP threshold as non_zero_threshold
-         % find the IP threshold using slop of sorted-IP distribution
-        % sort IP
+        % Find the IP threshold using slope of sorted-IP distribution.
+        % sort IP.
         [E,index] = sortrows(IP,3);
         size_IP = size(IP);
         size_IP = size_IP(1);
@@ -25,8 +22,8 @@ function [IP_threshold_new] = Find_IP_threshold_using_Slope(IP, threshold_times)
         
         %[slope_IP_cut_sorted, index_slope_IP] = sortrows(slope_IP_cut,1,'descend');
         
-        % using the value = slope_avg * threshold_times as the slop
-        % threshold to find the first IP point whose slope larger than the
+        % using the value = slope_avg * threshold_times as the slope
+        % threshold to find the first IP point whose slope is larger than the
         % slope threshold
         % threshold_times = 100;
        

@@ -1,7 +1,7 @@
 function [ reports_duration_m,reports_values_m ] = gen_new_report_after_EFlow_Thresh( Energy_Relative,threshE, reports, reports_duration, reports_values)
 
 % generate new reports list by deleting the reports whose energy is
-% higher than threshE
+% higher than threshold
 
 %threshE = 0.9;
 A = reports_duration;

@@ -16,7 +16,7 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 
 1. Download/Clone the A-Cure project as A-Cure.zip.
 
-2. Extract it and you should have A-Cure folder containing all code.
+2. Extract it and you should have the A-Cure folder containing all code.
 
 3. Open Matlab (We ran this code on Matlab R2018a), 
 	- add the A-Cure folder to path, 
@@ -34,7 +34,7 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 	- Acc: Accuracy
 	- RMSE_Clean: reconstruction RMSE with the report sets wihout noisy reports (using Least Square method if not mentioned)
 	- RMSE_Noise: reconstruction RMSE with the report sets wih noisy reports (using Least Square method if not mentioned)
-	- RMSE_[method]: reconstruction RMSE with the clearned report sets by a certain method, IP_Cumulative_SRMSE, IP_Spkie_SRMSE, or IP_EF_SRMSE
+	- RMSE_[method]: reconstruction RMSE with the cleaned report sets by a certain method, IP_Cumulative_SRMSE, IP_Spkie_SRMSE, or IP_EF_SRMSE
 	
 5. Output
 	1. **Folder**: outPut
@@ -45,7 +45,7 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 			- NoiP20_NoiS2: 'large portion low severity noise',
 			- NoiP20_NoiS4: 'large portion high severity noise'.
 	
-	2. **Image**: Reconstruction RMSE of different disease using different method with different experimental settings:
+	2. **Image**: Reconstruction RMSE of different diseases using different methods with different experimental settings:
 		- **Measles**: Measles_RMSE.png
 		![image of Measles](https://github.com/Jiaweixu-pitt/A-Cure/blob/master/Measles_RMSE.png)
 		
@@ -81,48 +81,48 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
   
 **Experimental Setup**:
 	
-	4 different disease
+	4 different diseases
 
-	4 different reports set with different noise setting. Details please check the paper.
+	4 different report sets with different noise setting. For details please check the paper.
   
 **Matlab Code dependencies:**
 
 	IP-EF-SRMSE method:
 	
 	-IP_EF_SRMSE_func.m 
-		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
+		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
 		
 			-collect_reports_norm.m: % Randomly create reports set using disease data and the pre-defined parameters. Reports have: start time, end time, total value
 			
-				-gen_report.m: % generate report.
+				-gen_report.m: % Generate report.
 				
-			-create_noise_report.m: % Randomly create noise reports based the pre-defined parameters.
+			-create_noise_report.m: % Randomly create noisy reports based the pre-defined parameters.
 			
-			-create_pair_reports.m: % Create all possible reports pair 
+			-create_pair_reports.m: % Create all possible report pairs.
 			
-			-BIP.m: % Calculate BIP for reports pair.
+			-BIP.m: % Calculate BIP.
 			
-			-IP_v13_2.m: % Calculate IP for report pair.
+			-IP_v13_2.m: % Calculate IP.
 			
 				-duration_ratio.m: % Calculate the proximity ratio.
 				
 				-proximity_ratio_new_2.m: % Calculate the proximity ratio.
 				
-		-rep_constraint_equations_full.m: % re-format the report: duration matrix, and total value, respectively.
+		-rep_constraint_equations_full.m: % Re-format the report: duration matrix, and total value, respectively.
 		
-		-Energy_Trans_M4.m: % Energy Flow algorithm to calculate the Energy of all reports nodes.
+		-Energy_Trans_M4.m: % Energy Flow algorithm to calculate the Energy of all report nodes.
 		
-		-Relative_Energy.m: % Obtain relative energy (E(i)/E_Max) from absolute Energy.
+		-Relative_Energy.m: % Obtain relative energy (E(i)/E_Max) from absolute energy.
 		
-		-sm_reconstr_2.m: % use H-Fuse to reconstruct the disease data from aggregated reports set.
+		-sm_reconstr_2.m: % Use H-Fuse to reconstruct the disease data from the aggregated reports set.
 		
-		-lsq_reconstruct.m: % use Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
+		-lsq_reconstruct.m: % Use Least Square method to reconstruct the disease data from the aggregated reports set, and calculate RMSE.
 		
-		-lsq_reconstruct_only.m: % use Least Square method to reconstruct the disease data from aggregated reports set.
+		-lsq_reconstruct_only.m: % Use Least Square method to reconstruct the disease data from aggregated reports set.
 		
-		-gen_new_report_after_EFlow_Thresh.m: % used in the section to provide reference for 'Spike' threshold. neglect it if using an alternateive way to define 'Spike'.
+		-gen_new_report_after_EFlow_Thresh.m: % Used in the section to provide reference for the 'Spike' threshold. neglect it if using an alternative way to define 'Spike'.
 		
-		-report_set_recon_data.m: % used in the section of an alternative way to define 'Spike' threshold, consist of two parts:
+		-report_set_recon_data.m: % Used in the section as an alternative way to define the 'Spike' threshold, consists of two parts:
 			-rep_constraint_equations_full.m % introduced before
 			--lsq_reconstruct_only.m % introduced before
 			
@@ -139,54 +139,54 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 	result file: /output/IP_Spike_SRMSE/Results_All_IP_Spike_SRMSE.mat, including:
   
   	1. Accuracy:
-  	-LSQ reconstruction applying noise detection/deletion with IP-Spike-SRMSE method
+  	-LSQ reconstruction applying noise detection/deletion with the IP-Spike-SRMSE method
   
   	2. All reconstruction RMSE including:
   	-LSQ reconstruction	
   	-with noisy reports
   	-without noisy reports (clean)
-  	-applying noise detection/deletion with IP-Spike-SRMSE method
+  	-applying noise detection/deletion with the IP-Spike-SRMSE method
   
 **Experimental Setup**:
 	
-	4 different disease
+	4 different diseases
 
-	4 different reports set with different noise setting. Details please check the paper.
+	4 different report sets with different noise setting. For details please check the paper.
   
 **Matlab Code dependencies:**
 
 	IP-Spike-SRMSE method:
 	
 	-IP_Spike_SRMSE_func.m 
-		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
+		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, BIP, pr, dr, % Also list the noisy reports.
 		
 			-collect_reports_norm.m: % Randomly create reports set using disease data and the pre-defined parameters. Reports have: start time, end time, total value
 			
-				-gen_report.m: % generate report.
+				-gen_report.m: % Generate report.
 				
-			-create_noise_report.m: % Randomly create noise reports based the pre-defined parameters.
+			-create_noise_report.m: % Randomly create noisy reports based the pre-defined parameters.
 			
-			-create_pair_reports.m: % Create all possible reports pair 
+			-create_pair_reports.m: % Create all possible report pairs. 
 			
-			-BIP.m: % Calculate BIP for reports pair.
+			-BIP.m: % Calculate BIP.
 			
-			-IP_v13_2.m: % Calculate IP for report pair.
+			-IP_v13_2.m: % Calculate IP.
 			
 				-duration_ratio.m: % Calculate the proximity ratio.
 				
 				-proximity_ratio_new_2.m: % Calculate the proximity ratio.
 				
-		-rep_constraint_equations_full.m: % re-format the report: duration matrix, and total value, respectively.
+		-rep_constraint_equations_full.m: % Re-format the report: duration matrix, and total value, respectively.
 		
-		-Find_IP_threshold_using_Slope.m: % find IP threshold using slope, detials in the paper.
+		-Find_IP_threshold_using_Slope.m: % Find the IP threshold using slope, detials in the paper.
 		
-		-lsq_reconstruct.m: % use Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
+		-lsq_reconstruct.m: % Use the Least Square method to reconstruct the disease data from the aggregated reports set, and calculate RMSE.
 		
-		-lsq_reconstruct_only.m: % use Least Square method to reconstruct the disease data from aggregated reports set.
+		-lsq_reconstruct_only.m: % Use the Least Square method to reconstruct the disease data from aggregated reports set.
 				
-		-report_set_recon_data.m: % used in the section of an alternative way to define 'Spike' threshold, consist of two parts:
-			-rep_constraint_equations_full.m % introduced before
-			--lsq_reconstruct_only.m % introduced before
+		-report_set_recon_data.m: % Used in the section as an alternative way to define the 'Spike' threshold, consists of two parts:
+			-rep_constraint_equations_full.m % See earlier.
+			--lsq_reconstruct_only.m % See earlier.
 			
 ## 4. IP-Cumulative-SRMSE method
 **Input**
@@ -200,50 +200,50 @@ More detail for IP in reference: Xu, Jiawei, Vladimir Zadorozhny, and John Grant
 	result file: /output/IP_Cumulative_SRMSE/Results_All_IP_Cumulative_SRMSE.mat, including:
   
   	1. Accuracy:
-  	-LSQ reconstruction applying noise detection/deletion with IP-Cumulative-SRMSE method
+  	-LSQ reconstruction applying noise detection/deletion with the IP-Cumulative-SRMSE method
   
   	2. All reconstruction RMSE including:
   	-LSQ reconstruction	
   	-with noisy reports
   	-without noisy reports (clean)
-  	-applying noise detection/deletion with IP-Cumulative-SRMSE method
+  	-applying noise detection/deletion with the IP-Cumulative-SRMSE method
   
 **Experimental Setup**:
 	
-	4 different disease
+	4 different diseases
 
-	4 different reports set with different noise setting. Details please check the paper.
+	4 different report sets with different noise setting. For details please check the paper.
   
 **Matlab Code dependencies:**
 
 	IP-Cumulative-SRMSE method:
 	
 	-IP_Cumulative_SRMSE_func.m 
-		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the, % pre-defined parameters, % calculate the IP, bip, pr, dr, % Also list the noisy reports.
+		-IP_calculation_v2_2.m:  % Create reports set based on the pre-defined parameters , % Modify the reports set by adding noisy reports based on the % pre-defined parameters, % calculate the IP, BIP, pr, dr, % Also list the noisy reports.
 		
 			-collect_reports_norm.m: % Randomly create reports set using disease data and the pre-defined parameters. Reports have: start time, end time, total value
 			
-				-gen_report.m: % generate report.
+				-gen_report.m: % Generate report.
 				
-			-create_noise_report.m: % Randomly create noise reports based the pre-defined parameters.
+			-create_noise_report.m: % Randomly create noisy reports based on the pre-defined parameters.
 			
-			-create_pair_reports.m: % Create all possible reports pair 
+			-create_pair_reports.m: % Create all possible report pairs. 
 			
-			-BIP.m: % Calculate BIP for reports pair.
+			-BIP.m: % Calculate the BIP.
 			
-			-IP_v13_2.m: % Calculate IP for report pair.
+			-IP_v13_2.m: % Calculate the IP.
 			
-				-duration_ratio.m: % Calculate the proximity ratio.
+				-duration_ratio.m: % Calculate the duration ratio.
 				
 				-proximity_ratio_new_2.m: % Calculate the proximity ratio.
 				
-		-rep_constraint_equations_full.m: % re-format the report: duration matrix, and total value, respectively.		
+		-rep_constraint_equations_full.m: % Re-format the report: duration matrix, and total value, respectively.		
 		
-		-lsq_reconstruct.m: % use Least Square method to reconstruct the disease data from aggregated reports set, and calculate RMSE.
+		-lsq_reconstruct.m: % Use the Least Square method to reconstruct the disease data from the aggregated reports set, and calculate RMSE.
 		
-		-lsq_reconstruct_only.m: % use Least Square method to reconstruct the disease data from aggregated reports set.
+		-lsq_reconstruct_only.m: % Use the Least Square method to reconstruct the disease data from the aggregated reports set.
 		
-		-report_set_recon_data.m: % used in the section of an alternative way to define 'Spike' threshold, consist of two parts:
-			-rep_constraint_equations_full.m % introduced before
-			--lsq_reconstruct_only.m % introduced before
+		-report_set_recon_data.m: % Used in the section as an alternative way to define the 'Spike' threshold, consist of two parts:
+			-rep_constraint_equations_full.m % See earlier.
+			--lsq_reconstruct_only.m % See earlier.
 			

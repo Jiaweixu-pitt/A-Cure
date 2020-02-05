@@ -1,6 +1,4 @@
 function [ Energy, M4, timeCalculation, sumEnergy, sumEnergyEnd] = Energy_Trans_M4( userSize, M1 )
-%UNTITLED6 Summary of this function goes here
-%   Detailed explanation goes here
 % Energy Spreading, Get the final energy and transformation matrix
 N = userSize;
 time0 = cputime;

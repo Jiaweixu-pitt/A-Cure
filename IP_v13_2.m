@@ -1,6 +1,6 @@
 function [ IP, pr, dr ] = IP_v13_2( BIP, report1, report2, neg_flag,period)
 % IP with duration and proximity
-% _2: consider pr could be period,not used in this paper
+% _2: pr could be period, but is not used in this paper
 
 % Calculate the duration ratio
 dr =  duration_ratio(report1, report2);

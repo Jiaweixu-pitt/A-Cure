@@ -1,4 +1,4 @@
-% using this script file to run A-Cure, three methods:
+% Use this script file to run A-Cure, three methods:
 % IP-EF-SRMSE method (best of all three):IP_EF_SRMSE_func();
 % IP-Spike-SRMSE method: run the file IP_Cumulative_SRMSE_func();
 % IP-Cumulative-SRMSE method run the file: IP_Spike_SRMSE_func();

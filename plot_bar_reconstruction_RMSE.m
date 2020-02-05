@@ -6,7 +6,7 @@ function [flag] = plot_bar_reconstruction_RMSE(disease, startPoint, endPoint, ..
     IP_Cumulative_str_RMSE_Clean)
 
 % plot reconstruction RMSE for a certain disease data
-% collecting data
+% initialize
 field_cumu_noise = fieldnames(IP_Cumulative_str_RMSE_Noise);
 field_cumu_clean = fieldnames(IP_Cumulative_str_RMSE_Clean);
 field_cumu = fieldnames(IP_Cumulative_str_RMSE_IP_Cumulative_SRMSE);
@@ -17,7 +17,7 @@ disease_y = zeros(num_bars,1);
 
 order = 1;
 
-% collecting data
+% collect data
 for i = startPoint:endPoint
     disease_y(order) = IP_Cumulative_str_RMSE_Noise.(field_cumu_noise{i});
     disease_y(order + 1) = IP_Cumulative_str_RMSE_IP_Cumulative_SRMSE.(field_cumu{i});

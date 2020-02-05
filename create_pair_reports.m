@@ -14,7 +14,7 @@ function [pair_reports] = create_pair_reports(reports)
 size_reports = size(reports);
 size_reports = size_reports(1);
 number_properties = 7;
-% total pairs are upper triable (n-1)+(n-2)+..+1 = n(n-1)/2
+% total number of pairs:  (n-1)+(n-2)+..+1 = n(n-1)/2
 size_pair_reports = size_reports * (size_reports - 1) / 2; 
 pair_reports = zeros(size_pair_reports,number_properties);
 
@@ -23,7 +23,7 @@ pointer_pair_reports = 1;
 for i = 1: size_reports
     for j = i+1 : size_reports
         
-        % report_1 R1 start earlier than report_2 R2
+        % report_1 R1 starts earlier than report_2 R2
         if(reports(i,1) < reports(j,1))
             R1_number = i;
             R2_number = j;
@@ -45,7 +45,7 @@ for i = 1: size_reports
         V2 = R2(3);
         
         D1 = T1_quote - T1 + 1; % T1 = 1, means start from day 1 ;
-        % T1_quote =2, means end after day 2 (include day 2);
+        % T1_quote =2, means end after day 2 (includes day 2);
         % thus duration, D1 = 2 - 1 + 1 means 2 days.
         D2 = T2_quote - T2 + 1;
         

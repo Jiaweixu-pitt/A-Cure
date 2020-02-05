@@ -2,7 +2,7 @@ function [str_Acc, str_RMSE_clean_hfuse, str_RMSE_clean_LSQ,...
     str_RMSE_IP_EF_hfuse,str_RMSE_IP_EF_LSQ,...
     str_RMSE_Noise_hfuse, str_RMSE_Noise_LSQ, flag] = IP_EF_SRMSE_func()
 
-% This is the main code for A-Cure. It applys IP-(IG)-EF-SRMSE method
+% This is the main code for A-Cure. It applies the IP-(IG)-EF-SRMSE method
 % to dectect noisy reports for reconstruction of four disease data
 % More detail in reference:
 %****************************
@@ -27,12 +27,12 @@ function [str_Acc, str_RMSE_clean_hfuse, str_RMSE_clean_LSQ,...
 % hfuse and LSQ reconstruction
 % with noisy reports
 % without noisy reports (clean)
-% applying noise detection/deletion with IP-EF-SRMSE method
+% applying noise detection/deletion with the IP-EF-SRMSE method
 %
 % Experimental Setup:
-% 4 different disease
-% 4 different reports set with different noise setting.
-% details please check the paper.
+% 4 different diseases
+% 4 different report sets with different noise setting.
+% For details please check the paper.
 
 
 % loading input disease data
@@ -47,7 +47,7 @@ folder0 = output_folder;
 mkdir(folder0);
 
 % Calculation Start:
-% nDisease = 1:4 will calculate all 4 disease
+% nDisease = 1:4 will calculate all 4 diseases
 % nDisease = 1:1 will calculate measles only
 % nDisease = 2:2 will calculate hepatitis only
 % nDisease = 3:3 will calculate pertussis only
@@ -71,13 +71,13 @@ for nDisease = 1:4
     period = 0; % data has no periodicity
     ip_version = 13; % version to define ip, which is used in this paper
     
-    % Parameters to set up number of noisy reports
+    % Parameters to set up the number of noisy reports
     noise_number = [10, 20];
     noise_level =["NoiP10", "NoiP20"];
     
     % Parameters to set up noise severity ratio
-    noise_min = 1;  % noise fluctuation lowest edge
-    noise_max =  2; % noise fluctuation highest edge
+    noise_min = 1;  % noise fluctuation, lowest edge
+    noise_max =  2; % noise fluctuation, highest edge
     noise_severity = [0.2, 0.4]; % 0.2 = 20% of normal value
     noise_severity_level =["NoiS2","NoiS4"];
     severe_ratio = noise_severity;
@@ -90,12 +90,12 @@ for nDisease = 1:4
     
     name_txt_disease = strcat(deseaseS);%variable for output file name
     
-    % for certain disease calculating with different parameters of
+    % Disease calculating with different parameters of
     % noisy reports set up
     for i_noise = 1: length(noise_number)
         for i = 1 : length(severe_ratio)
             
-            % create output folder for differnt disease and parameters setting
+            % create output folder for different disease and parameters setting
             %folder = sprintf('%s%s\\%s%s\\',folder0,deseaseS,noise_level(i_noise),noise_severity_level(i));
             %mkdir(folder);
             
@@ -107,14 +107,14 @@ for nDisease = 1:4
             noise_min_now = noise_min * noise_severity(i);
             noise_max_now = noise_max * noise_severity(i);
             
-            % Created reports set based on the pre-defined parameters
+            % Creat reports set based on the pre-defined parameters.
             % Modify the reports set by adding noisy reports based on the
-            % pre-defined parameters
-            % calculate the IP, bip, pr, dr
+            % pre-defined parameters.
+            % Calculate the IP, BIP, pr, dr.
             % Also list the noisy reports.
             [ IP, bip, pr, dr, reports_ini, reports_cell.(name_txt_disease), severe_reports_list] = IP_calculation_v2_2( events,ip_version,noise_number_now,noise_min_now,noise_max_now,mu_rn,var_rn,mu_rd,var_rd,period);
             
-            % re-format the report: duration matrix, and total value, respectively
+            % Re-format the report: duration matrix, and total value, respectively
             [reports_duration_cell.(name_txt_disease),reports_values_cell.(name_txt_disease)]=rep_constraint_equations_full(reports_cell.(name_txt_disease),events);
             
             
@@ -130,9 +130,9 @@ for nDisease = 1:4
             M1 = zeros(num_reports, num_reports);
             
             % in this paper,
-            % if IP>0.5, the pair i_j is incompatable, the edge between i
+            % if IP>0.5, the pair i_j is incompatible, the edge between i
             % and j is 1
-            % if IP<=0.5, the pair i_j is incompatable, the edge between i
+            % if IP<=0.5, the pair i_j is compatible, the edge between i
             % and j is 0
             % Other IP-threshold is also OK.
             IP_threshold = 0.5;
@@ -144,11 +144,11 @@ for nDisease = 1:4
             end
             
             
-            % Energy Flow algorithm to calculate the Energy of all reports
+            % Energy Flow algorithm to calculate the Energy of all report
             % nodes.
             [ Energy, M4, timeCalculation, sumEnergy, sumEnergyEnd] = Energy_Trans_M4( num_reports, M1 );
             
-            % Obtaining relative energy (E(i)/E_Max) from absolute Energy
+            % Obtaining relative energy (E(i)/E_Max) from absolute Energy.
             [ Energy_Relative_cell.(name_txt) ] = Relative_Energy( num_reports, Energy );
             
             %**************************************************************
@@ -156,7 +156,7 @@ for nDisease = 1:4
             % detect the noisy reports.
             % The only usage of this section is to provide a reference for a
             % threshold to detect the 'spike' of S-RMSE.
-            % if you use alternative way to find a threshold, for example the way in the next section
+            % If you use the alternative way to find a threshold, for example the way in the next section
             % below, you don't need this section.
             threshE = 1:-0.01:0;
             length_threshE = length(threshE);
@@ -195,13 +195,13 @@ for nDisease = 1:4
             %{
             % the following plot is SRMSE vs Energy-threshold and the
             % position of the noisy reports using the trial version of
-            % SRMSE method (not used in this paper)
+            % the SRMSE method (not used in this paper)
             
             legendString = sprintf('severe = %0.1f',severe_ratio(i));
             % plot energy_threshold vs S-RMSE
             plot(threshE(2:sizeNoneZero),recon_err(2:sizeNoneZero),'DisplayName',legendString,'Marker','o');
             hold on;
-            %plot the noise reports Energy position
+            %plot the noisy reports Energy position
             y = [0,1000];
             noise_reports = [severe_reports_list, Energy_Relative_cell.(name_txt)(severe_reports_list)];
             for i_t =1:length(severe_reports_list)
@@ -233,9 +233,9 @@ for nDisease = 1:4
             
             
             %**************************************************************
-            % the Following section is an alter way to define the threshold
+            % the Following section is an alternative way to define the threshold
             % for 'Spike'. The performance is also very good.
-            %Sequential RMSE without delete any reports
+            %Sequential RMSE without deleting any reports.
             size_report_set = num_reports;
             reports_noise = reports_cell.(name_txt_disease);
             [recon_reports_noise, TOL] = report_set_recon_data(reports_noise,events);
@@ -251,13 +251,13 @@ for nDisease = 1:4
             
             mean_srmse_alternative_way = mean(srmse_noise);
             %**************************************************************
-            % the above section is an alter way to define the threshold
+            % The above section is an alternative way to define the threshold
             % for 'Spike'. The performance is also very good.
             
             
-            % delete the reports which cause the spike larger than
-            % double of average of SRMSE screening in the section above
-            % you can use an alternative way to define the threshold
+            % Delete the reports which cause the spike to be larger than
+            % double of the average of SRMSE screening in the section above.
+            % You can use an alternative way to define the threshold.
             
             %threshold_E_spike = 0.4 * mean_srmse_alternative_way;
             threshold_E_spike = 2* mean(recon_err(2:sizeNoneZero));
@@ -285,7 +285,7 @@ for nDisease = 1:4
             
             % Start the S-RMSE Screening process, for details please check the
             % paper.
-            % screent the reports from highest energy to the lowsest one
+            % Screen the reports from highest energy to the lowsest one.
             while( (newEnergyList_sort(loop_point,1) >= threshold_E) && ... % end if energy is smaller than threshold
                     loop_point >= threshold_reports ... % end if threshold # of reports have been checked
                     )
@@ -352,7 +352,7 @@ for nDisease = 1:4
             % HFuse with clean
             [recon_events_hfuse_clean, recon_error_hfuse_clean] = sm_reconstr_2(reports_duration_clean, reports_values_clean, events);
             
-            % storage the RMSE into the structure
+            % storing the RMSE into the structure
             str_RMSE_IP_EF_LSQ.(name_txt)= RMSE_Best_2ndMethod;
             str_RMSE_Noise_LSQ.(name_txt) = RMSE_Noise;
             str_RMSE_clean_LSQ.(name_txt)= RMSE_clean;
@@ -361,7 +361,7 @@ for nDisease = 1:4
             str_RMSE_Noise_hfuse.(name_txt) = recon_error_hfuse_noise;
             str_RMSE_clean_hfuse.(name_txt)= recon_error_hfuse_clean;
             
-            %save variables of RMSE to file
+            %Save the variables of RMSE to file
             RMSE_IP_EF_SRMSE = RMSE_Best_2ndMethod;
             %variableName = strcat(folder,'variable_RMSE.mat');
             %save(variableName,'RMSE_Noise','RMSE_IP_EF_SRMSE', 'RMSE_clean');
@@ -437,11 +437,11 @@ for nDisease = 1:4
             reports_target = zeros(size_reports_cm,1);
             reports_group = zeros(size_reports_cm,1);
             
-            % set non noise reports
+            % set non noisy reports
             reports_target(1:size_reports_cm) = 1;
             reports_group(1:size_reports_cm) = 1;
             
-            % set noise reports
+            % set noisy reports
             reports_target(noise_reports_target) = 2;
             reports_group(noise_reports_predict) = 2;
             

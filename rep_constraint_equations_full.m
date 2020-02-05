@@ -1,6 +1,6 @@
 function [Aeq,beq] = rep_constraint_equations_full(reports,events)
 %For each report generate consistency constraint equation based on events covered by that report. 
-% Ie, each x variable corresponds to a time unit.
+% each x variable corresponds to a time unit.
 
 num_of_reports = size(reports,1);
 num_of_events = size(events,2);

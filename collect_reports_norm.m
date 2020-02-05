@@ -1,5 +1,5 @@
 function collected_reports = collect_reports_norm(events, m_num_of_reports,d_num_of_reports, m_reported_duration, d_reported_duration)
-% collect multiple, possibly overlapping reports about  number of events within
+% collect multiple, possibly overlapping reports about the number of events within
 % reported intervals
 % 
 %  
