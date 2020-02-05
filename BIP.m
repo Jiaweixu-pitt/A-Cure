@@ -1,7 +1,7 @@
 function res = BIP(O,D1,D2,V1,V2,neg_flag)
-% Probability of incompatibility of two reports based on
-% relative overlap ratios RO1 and RO2. V1 and V2 are reported values
-% neg_flag = 1 if we allow negtive values in the time series data
+% Probability of incompatibility of two reports based on the
+% relative overlap ratios RO1 and RO2. V1 and V2 are the reported values.
+% neg_flag = 1 if we allow negative values in the time series data.
 
 
 RO1 = O/D1;
