@@ -1,7 +1,7 @@
 function [str_Acc, str_RMSE_Noise, str_RMSE_Clean,...
     str_RMSE_IP_Spike_SRMSE, flag] = IP_Spike_SRMSE_func()
-% This is the main code for A-Cure. It applys IP-Spike-SRMSE method
-% to dectect noisy reports for reconstruction of four disease data
+% This is the main code for A-Cure. It applies the IP-Spike-SRMSE method
+% to detect noisy reports for reconstruction of four disease data
 % More detail in reference:
 %****************************
 % Jiawei Xu, Vladimir Zadorozhny, and John Grant.
@@ -19,7 +19,7 @@ function [str_Acc, str_RMSE_Noise, str_RMSE_Clean,...
 % folder: output/IP_Spike_SRMSE/
 % result file: output/IP_Spike_SRMSE/Results_All_IP_Spike_RMSE.mat, including:
 % 1. Accuracy
-% LSQ reconstruction applying noise detection/deletion with IP-EF-SRMSE method
+% LSQ reconstruction applying noise detection/deletion with the IP-EF-SRMSE method
 %
 % 2. All reconstruction RMSE including:
 % LSQ reconstruction
@@ -28,9 +28,9 @@ function [str_Acc, str_RMSE_Noise, str_RMSE_Clean,...
 % applying noise detection/deletion with IP-Spike-SRMSE method
 %
 % Experimental Setup:
-% 4 different disease
-% 4 different reports set with different noise setting.
-% details please check the paper.
+% 4 different diseases
+% 4 different report sets with different noise setting.
+% For details please check the paper.
 
 
 % loading input disease data
@@ -44,7 +44,7 @@ folder0 = output_folder;
 mkdir(folder0);
 
 % Calculation Start:
-% nDisease = 1:4 will calculate all 4 disease
+% nDisease = 1:4 will calculate all 4 diseases
 % nDisease = 1:1 will calculate measles only
 % nDisease = 2:2 will calculate hepatitis only
 % nDisease = 3:3 will calculate pertussis only
@@ -66,15 +66,15 @@ for nDisease = 1:4
     end
     
     period = 0; % data has no periodicity
-    ip_version = 13; % version to define ip, which is used in this paper
+    ip_version = 13; % version to define IP, which is used in this paper
     
-    % Parameters to set up number of noisy reports
+    % Parameters to set up the number of noisy reports
     noise_number = [10, 20];
     noise_level =["NoiP10", "NoiP20"];
     
     % Parameters to set up noise severity ratio
-    noise_min = 1;  % noise fluctuation lowest edge
-    noise_max =  2; % noise fluctuation highest edge
+    noise_min = 1;  % noise fluctuation, lowest edge
+    noise_max =  2; % noise fluctuation, highest edge
     noise_severity = [0.2, 0.4]; % 0.2 = 20% of normal value
     noise_severity_level =["NoiS2","NoiS4"];
     severe_ratio = noise_severity;
@@ -87,7 +87,7 @@ for nDisease = 1:4
     
     name_txt_disease = strcat(deseaseS);%variable for output file name
     
-    % for certain disease calculating with different parameters of
+    % Disease calculating with different parameters of
     % noisy reports set up
     for i_noise = 1: length(noise_number)
         for i = 1 : length(severe_ratio)
@@ -101,10 +101,10 @@ for nDisease = 1:4
             noise_min_now = noise_min * noise_severity(i);
             noise_max_now = noise_max * noise_severity(i);
             
-            % Created reports set based on the pre-defined parameters
+            % Create reports set based on the pre-defined parameters.
             % Modify the reports set by adding noisy reports based on the
-            % pre-defined parameters
-            % calculate the IP, bip, pr, dr
+            % pre-defined parameters.
+            % Calculate the IP, BIP, pr, dr.
             % Also list the noisy reports.
             [ IP, bip, pr, dr, reports_ini, reports_cell.(name_txt_disease), severe_reports_list] = IP_calculation_v2_2( events,ip_version,noise_number_now,noise_min_now,noise_max_now,mu_rn,var_rn,mu_rd,var_rd,period);
             
@@ -117,9 +117,9 @@ for nDisease = 1:4
             str_ip_max.(name_txt) = max(IP(:,3));
             str_bip_max.(name_txt) = max(bip(:,3));
             
-            % auto find the IP threshold as non_zero_threshold
-            % threshold_times = 100; //orginal setting
-            % using Slop algorithm, details in the paper
+            % Find the IP threshold as non_zero_threshold.
+            % threshold_times = 100; //original setting
+            % using Slope algorithm, details in the paper
             threshold_times = 100;
             [IP_threshold_new] = Find_IP_threshold_using_Slope(IP,threshold_times);
             
@@ -146,10 +146,10 @@ for nDisease = 1:4
             report_set_after_IP = zeros(size_report_set,2);
             report_set_after_IP(:,1) = 1:size_report_set;% give orders
             report_set_after_IP(ele_X_new,2) = occ_X_new;% which report
-            %has several non-zero IP cases
+            %has several non-zero IP occurrences
             
             %sort report_set based the the 2nd col: how many times non-0 IP
-            %cases
+            %occurrences
             %report_set_after_IP_sort = sortrows(report_set_after_IP,2,'descend');
             
             % for reports with noise
@@ -164,9 +164,9 @@ for nDisease = 1:4
             RMSE_Clean = sqrt(mean((recon_reports_clean - events).^2));
             
             
-            %Sequential RMSE without delete any reports
-            %tihs is a method to provide reference to define the threshold
-            % for detecting/deleting noise report
+            %Sequential RMSE without deleting any reports
+            %This is the method to define the threshold
+            % for detecting/deleting noisy reports.
             % threshold = n*mean_srmse, n is a number.
             srmse_noise = zeros(size_report_set,1);
             for k = 1:size_report_set
@@ -183,11 +183,11 @@ for nDisease = 1:4
             %S-RMSE (with deleting) using order from IP
             
             %sort report_set based the the 2nd col: how many times non-0 IP
-            %cases
+            %occurrences
             report_set_after_IP_sort = sortrows(report_set_after_IP,2,'ascend');
             
             
-            %the opposite oder to compare
+            %the opposite ordr for comparison
             %report_set_after_IP_sort = sortrows(report_set_after_IP,2,'descend');
             
             
@@ -221,21 +221,21 @@ for nDisease = 1:4
                 reports_deleted_list_tmp = reports_deleted_list;
                 reports_deleted_list_tmp(how_many_del_tmp) = report_delete;
                 
-                % reports with current checking report
+                % reports with current report
                 reports_1 = reports_noise;
                 reports_1(reports_deleted_list,:) = [];
                 
                 
-                % reports without current checking report
+                % reports without current report
                 reports_2 = reports_noise;
                 reports_2(reports_deleted_list_tmp,:) = [];
                 
-                % compare the RMSE between two report set 1 and 2
+                % compare the RMSE between two report sets 1 and 2
                 [recon_reports_1] = report_set_recon_data(reports_1,events);
                 [recon_reports_2] = report_set_recon_data(reports_2,events);
                 RMSE_1and2 = sqrt(mean((recon_reports_1 - recon_reports_2).^2));
                 
-                % check if current report should delete or not
+                % check if current report should be deleted
                 if (RMSE_1and2 >= threshold_rmse_del)
                     reports_final = reports_2;
                     
@@ -273,11 +273,11 @@ for nDisease = 1:4
             reports_target = zeros(size_reports_cm,1);
             reports_group = zeros(size_reports_cm,1);
             
-            % set non noise reports
+            % set non noisy reports
             reports_target(1:size_reports_cm) = 1;
             reports_group(1:size_reports_cm) = 1;
             
-            % set noise reports
+            % set noisy reports
             reports_target(noise_reports_target) = 2;
             reports_group(noise_reports_predict) = 2;
             
