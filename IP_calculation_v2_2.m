@@ -1,8 +1,8 @@
 function [ IP, bip, pr, dr, reports_ini, reports_noise, noise_reports] = IP_calculation_v2_2( events,ip_version,noise_number,noise_min,noise_max,mu_rn,var_rn,mu_rd,var_rd,period)
 
-% v1: generating simulated data: uniformly distibutied with parameters
+% v1: generating simulated data: uniformly distibuted with parameters
 % v2: loading events (real disease data)
-% v2_2: same as v2, but can choose pr for periodic example,however, we dont
+% v2_2: same as v2, but can choose pr for periodic example, however, we don't
 % have periodic cases
 % experiment simulation of newly defined Incompatibility Probability.
 
@@ -12,17 +12,17 @@ data = events;
 % create reports
 reports = collect_reports_norm(data, mu_rn, var_rn, mu_rd, var_rd);% start_point, end_point, Value
 
-% Randomly create noise reports based the pre-defined parameters.
+% Randomly create noisy reports based the pre-defined parameters.
 [reports_noise, noise_reports, noise_ratio ] = create_noise_report(reports, noise_number,noise_min,noise_max);
 
 
-% applying reports with noise
+% Apply reports with noise
 reports_ini = reports;  % original reports set 
 reports = reports_noise; % noisy reports set
 
 
 time_full_start = cputime;
-% Create all possible reports pair 
+% Create all possible report pairs 
 % 1. pairwise properties: (#of1, #of2, D1, D2, V1, V2,  O)
 % for the pair, T1 always < T2. report 1 starts earlier always.
 % #1: report number of report1
@@ -34,7 +34,7 @@ time_full_start = cputime;
 [pair_reports] = create_pair_reports(reports);
 
 
-%2. Calculate pair incompatibility probability (IP)
+%2. Calculate the incompatibility probability (IP)
 size_pr = size(pair_reports);
 size_pr = size_pr(1);
 IP = zeros(size_pr,3); % #R1, #R2, #IP pairwise
@@ -42,8 +42,8 @@ bip = zeros(size_pr,3);
 pr = zeros(size_pr,3);
 dr = zeros(size_pr,3);
 
-% choose the definitation of IP formula
-% details please check our previous paper:
+% Choose the definition of IP formula
+% For details please check our previous paper:
 % Xu, J., Zadorozhny, V., & Grant, J. (2019). 
 % IncompFuse: a logical framework for historical information fusion with 
 % inaccurate data sources. Journal of Intelligent Information Systems, 1-19.
